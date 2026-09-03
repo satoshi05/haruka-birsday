@@ -38,6 +38,10 @@ venv/
 # Node / frontend tooling
 node_modules/
 dist/
+.vinext/
+.wrangler/
+outputs/
+work/
 .vite/
 .parcel-cache/
 .next/
