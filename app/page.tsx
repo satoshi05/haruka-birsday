@@ -6,11 +6,11 @@ import memories from '@/data/memories.json';
 
 type Photo = (typeof memories.chapters)[number]['photos'][number];
 
-function MemoryPhoto({ photo, className = '', eager = false, onLoad }: { photo: Photo; className?: string; eager?: boolean; onLoad?: () => void }) {
+function MemoryPhoto({ photo, className = '', eager = false }: { photo: Photo; className?: string; eager?: boolean }) {
   return (
     <picture className={className}>
       <source media="(max-width: 768px)" srcSet={photo.srcSmall} />
-      <img loading={eager ? 'eager' : 'lazy'} src={photo.src} alt={photo.alt} onLoad={onLoad} />
+      <img loading={eager ? 'eager' : 'lazy'} src={photo.src} alt={photo.alt} />
     </picture>
   );
 }
@@ -24,7 +24,7 @@ export default function Home() {
   ], []);
   const [randomIndex, setRandomIndex] = useState(0);
   const [introViews, setIntroViews] = useState(0);
-  const [introLoading, setIntroLoading] = useState(false);
+  const [introReady, setIntroReady] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = introViews < 3 ? 'hidden' : '';
@@ -32,16 +32,28 @@ export default function Home() {
   }, [introViews]);
 
   useEffect(() => {
-    introPool.forEach((photo) => {
-      const preload = new Image();
-      preload.src = photo.srcSmall;
-    });
+    let active = true;
+    const preload = introPool.map((photo) => new Promise<void>((resolve) => {
+      const image = new Image();
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
+        resolve();
+      };
+      image.onload = finish;
+      image.onerror = finish;
+      image.src = photo.srcSmall;
+      if (image.complete) finish();
+      window.setTimeout(finish, 6000);
+    }));
+    Promise.all(preload).then(() => { if (active) setIntroReady(true); });
+    return () => { active = false; };
   }, [introPool]);
 
   const openMemory = () => {
     if (introViews >= 3) return;
     const nextView = introViews + 1;
-    setIntroLoading(true);
     setIntroViews(nextView);
     if (nextView === 3) {
       window.setTimeout(() => document.querySelector('.timeline')?.scrollIntoView({ behavior: 'smooth' }), 250);
@@ -62,20 +74,14 @@ export default function Home() {
       <section className={`opening ${introViews ? 'opening--memory' : ''}`} aria-labelledby="site-title">
         <div className="opening__grain" />
         {introViews > 0 && (
-          <MemoryPhoto
-            key={introPool[introViews - 1].src}
-            photo={introPool[introViews - 1]}
-            className="opening-memory"
-            eager
-            onLoad={() => setIntroLoading(false)}
-          />
+          <MemoryPhoto key={introPool[introViews - 1].src} photo={introPool[introViews - 1]} className="opening-memory" eager />
         )}
-        {introLoading && <div className="opening-loader" role="status" aria-label="写真を読み込み中"><span /></div>}
         <div className="opening__content">
           {introViews === 0 && <h1 id="site-title">Happy Birthday<br />Haruka.</h1>}
-          {introViews < 3 && (
-            <button className="opening-trigger" onClick={openMemory} type="button" disabled={introLoading}>
-              <span>{introLoading ? '読み込み中' : introViews === 0 ? '思い出を見る' : 'もう一枚'}</span>
+          {!introReady && <div className="opening-loader" role="status" aria-label="写真を読み込み中"><span /></div>}
+          {introReady && introViews < 3 && (
+            <button className="opening-trigger" onClick={openMemory} type="button">
+              <span>{introViews === 0 ? '思い出を見る' : 'もう一枚'}</span>
               <small>{introViews} / 3</small>
             </button>
           )}
