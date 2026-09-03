@@ -27,6 +27,14 @@ export default function Home() {
   const [introReady, setIntroReady] = useState(false);
 
   useEffect(() => {
+    const resetOpening = () => window.scrollTo(0, 0);
+    window.history.scrollRestoration = 'manual';
+    resetOpening();
+    window.addEventListener('pageshow', resetOpening);
+    return () => window.removeEventListener('pageshow', resetOpening);
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = introViews < 3 ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [introViews]);
@@ -71,7 +79,7 @@ export default function Home() {
 
   return (
     <main>
-      <section className={`opening ${introViews ? 'opening--memory' : ''}`} aria-labelledby="site-title">
+      <section className={`opening ${introViews ? 'opening--memory' : ''} ${introViews < 3 ? 'opening--locked' : ''}`} aria-labelledby="site-title">
         <div className="opening__grain" />
         {introViews > 0 && (
           <MemoryPhoto key={introPool[introViews - 1].src} photo={introPool[introViews - 1]} className="opening-memory" eager />
