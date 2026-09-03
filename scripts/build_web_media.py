@@ -71,15 +71,15 @@ def main() -> None:
             convert_photo(source, large, 1280)
             convert_photo(source, small, 768)
             chapter["photos"].append({
-                "src": f"/media/{web_slug}/{stem}-1280.webp",
-                "srcSmall": f"/media/{web_slug}/{stem}-768.webp",
+                "src": f"media/{web_slug}/{stem}-1280.webp",
+                "srcSmall": f"media/{web_slug}/{stem}-768.webp",
                 "alt": f"{title}の思い出 {photo_number}",
             })
         for video_number, source in enumerate(videos, 1):
             destination = PUBLIC_ROOT / web_slug / f"video-{video_number:02d}.mp4"
             convert_video(source, destination)
             chapter["videos"].append({
-                "src": f"/media/{web_slug}/video-{video_number:02d}.mp4",
+                "src": f"media/{web_slug}/video-{video_number:02d}.mp4",
                 "label": f"{title}の動画 {video_number}",
             })
         manifest["chapters"].append(chapter)
