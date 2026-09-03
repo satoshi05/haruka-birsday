@@ -145,7 +145,7 @@ export default function Home() {
         <p className="section-label section-label--light reveal">FOR HARUKA</p>
         <div className="message-lines">
           <p className="reveal">一緒にいれて幸せです。</p>
-          <p className="reveal">29歳の1年間も</p>
+          <p className="reveal">28歳の1年間も</p>
           <p className="reveal">一緒に楽しもう！</p>
           <p className="reveal">いつもありがとう！</p>
         </div>
