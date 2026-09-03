@@ -1,0 +1,50 @@
+# Private original media (never commit)
+assets/photos/raw/*
+!assets/photos/raw/.gitkeep
+assets/videos/raw/*
+!assets/videos/raw/.gitkeep
+
+# Generated media-analysis artifacts
+assets/video-thumbnails/*
+!assets/video-thumbnails/.gitkeep
+data/contact-sheets/
+data/thumbnails/
+data/analysis-cache/
+data/*.tmp
+
+# Local work and exports
+tmp/
+temp/
+cache/
+exports/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node / frontend tooling
+node_modules/
+dist/
+.vite/
+.parcel-cache/
+.next/
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
