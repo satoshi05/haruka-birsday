@@ -30,11 +30,14 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .opening-memory { position: absolute; z-index: 0; inset: 0; display: block; width: 100%; height: 100%; animation: photo-in .55s ease both; }
 .opening--memory::after { content: ''; position: absolute; z-index: 1; inset: 0; background: linear-gradient(180deg, #0007, #0002 45%, #0009); }
 .eyebrow, .section-label, .chapter-number, .scroll-note { font-size: 10px; letter-spacing: .32em; text-transform: uppercase; }
-.opening h1 { margin: 18px 0 44px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(52px, 17vw, 98px); font-weight: 400; letter-spacing: .08em; line-height: .95; }
+.opening h1 { margin: 18px 0 44px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(42px, 13vw, 82px); font-weight: 400; letter-spacing: .04em; line-height: 1.08; }
 .opening-trigger { display: grid; place-items: center; gap: 16px; min-width: 146px; min-height: 48px; margin: 18px auto 0; padding: 14px 20px; border: 1px solid #f1ede477; background: #0d0d0d55; color: inherit; cursor: pointer; backdrop-filter: blur(8px); }
+.opening-trigger:disabled { cursor: wait; opacity: .65; }
 .opening-trigger span { font-family: Arial, sans-serif; font-size: 11px; font-weight: 400; letter-spacing: .16em; line-height: 1.2; }
 .opening-trigger small { color: #f1ede466; font-size: 9px; letter-spacing: .28em; }
 .opening-trigger:focus-visible { outline: 1px solid #f1ede477; outline-offset: 8px; }
+.opening-loader { position: absolute; z-index: 4; inset: 0; display: grid; place-items: center; pointer-events: none; background: #080808; }
+.opening-loader span { width: 28px; height: 28px; border: 1px solid #f1ede444; border-top-color: var(--ivory); border-radius: 50%; animation: loading-spin .8s linear infinite; }
 .scroll-note { position: absolute; bottom: max(24px, env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); color: #f1ede477; }
 
 .section-label, .chapter-number { margin: 0 0 18px; color: var(--muted); }
@@ -70,6 +73,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 @keyframes opening-in { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
 @keyframes reveal { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
 @keyframes photo-in { from { opacity: .25; } to { opacity: 1; } }
+@keyframes loading-spin { to { transform: rotate(360deg); } }
 
 @media (min-width: 768px) {
   .chapter__hero { width: min(100% - 80px, 1240px); height: 78vh; margin: 0 auto 18px; }

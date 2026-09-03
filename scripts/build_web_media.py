@@ -21,7 +21,7 @@ VIDEO_EXTENSIONS = {".mp4", ".mov", ".m4v"}
 
 CHAPTERS = [
     ("03-yamanashi-trip", "富士・山梨"),
-    ("01-first-days-and-festival", "さくらんぼ狩り・富士吉原祭り"),
+    ("01-first-days-and-festival", "はじめての日"),
     ("06-grand-illumination", "グランイルミ"),
     ("02-ayame-festival", "あやめ祭り"),
     ("05-atami-sea-fireworks", "熱海"),

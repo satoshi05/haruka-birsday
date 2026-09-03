@@ -70,73 +70,68 @@
     },
     {
       "number": 2,
-      "title": "さくらんぼ狩り・富士吉原祭り",
+      "title": "はじめての日",
       "photos": [
         {
           "src": "/media/chapter-02/photo-01-1280.webp",
           "srcSmall": "/media/chapter-02/photo-01-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 1"
+          "alt": "はじめての日の思い出 1"
         },
         {
           "src": "/media/chapter-02/photo-02-1280.webp",
           "srcSmall": "/media/chapter-02/photo-02-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 2"
+          "alt": "はじめての日の思い出 2"
         },
         {
           "src": "/media/chapter-02/photo-03-1280.webp",
           "srcSmall": "/media/chapter-02/photo-03-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 3"
+          "alt": "はじめての日の思い出 3"
         },
         {
           "src": "/media/chapter-02/photo-04-1280.webp",
           "srcSmall": "/media/chapter-02/photo-04-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 4"
+          "alt": "はじめての日の思い出 4"
         },
         {
           "src": "/media/chapter-02/photo-05-1280.webp",
           "srcSmall": "/media/chapter-02/photo-05-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 5"
+          "alt": "はじめての日の思い出 5"
         },
         {
           "src": "/media/chapter-02/photo-06-1280.webp",
           "srcSmall": "/media/chapter-02/photo-06-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 6"
+          "alt": "はじめての日の思い出 6"
         },
         {
           "src": "/media/chapter-02/photo-07-1280.webp",
           "srcSmall": "/media/chapter-02/photo-07-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 7"
+          "alt": "はじめての日の思い出 7"
         },
         {
           "src": "/media/chapter-02/photo-08-1280.webp",
           "srcSmall": "/media/chapter-02/photo-08-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 8"
+          "alt": "はじめての日の思い出 8"
         },
         {
           "src": "/media/chapter-02/photo-09-1280.webp",
           "srcSmall": "/media/chapter-02/photo-09-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 9"
+          "alt": "はじめての日の思い出 9"
         },
         {
           "src": "/media/chapter-02/photo-10-1280.webp",
           "srcSmall": "/media/chapter-02/photo-10-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 10"
+          "alt": "はじめての日の思い出 10"
         },
         {
           "src": "/media/chapter-02/photo-11-1280.webp",
           "srcSmall": "/media/chapter-02/photo-11-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 11"
-        },
-        {
-          "src": "/media/chapter-02/photo-12-1280.webp",
-          "srcSmall": "/media/chapter-02/photo-12-768.webp",
-          "alt": "さくらんぼ狩り・富士吉原祭りの思い出 12"
+          "alt": "はじめての日の思い出 11"
         }
       ],
       "videos": [
         {
           "src": "/media/chapter-02/video-01.mp4",
-          "label": "さくらんぼ狩り・富士吉原祭りの動画 1"
+          "label": "はじめての日の動画 1"
         }
       ]
     },
@@ -272,11 +267,6 @@
           "src": "/media/chapter-05/photo-05-1280.webp",
           "srcSmall": "/media/chapter-05/photo-05-768.webp",
           "alt": "熱海の思い出 5"
-        },
-        {
-          "src": "/media/chapter-05/photo-06-1280.webp",
-          "srcSmall": "/media/chapter-05/photo-06-768.webp",
-          "alt": "熱海の思い出 6"
         }
       ],
       "videos": []
@@ -334,11 +324,6 @@
           "src": "/media/chapter-06/photo-10-1280.webp",
           "srcSmall": "/media/chapter-06/photo-10-768.webp",
           "alt": "長岡花火の思い出 10"
-        },
-        {
-          "src": "/media/chapter-06/photo-11-1280.webp",
-          "srcSmall": "/media/chapter-06/photo-11-768.webp",
-          "alt": "長岡花火の思い出 11"
         }
       ],
       "videos": [

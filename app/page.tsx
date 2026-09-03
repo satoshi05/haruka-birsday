@@ -6,31 +6,42 @@ import memories from '@/data/memories.json';
 
 type Photo = (typeof memories.chapters)[number]['photos'][number];
 
-function MemoryPhoto({ photo, className = '', eager = false }: { photo: Photo; className?: string; eager?: boolean }) {
+function MemoryPhoto({ photo, className = '', eager = false, onLoad }: { photo: Photo; className?: string; eager?: boolean; onLoad?: () => void }) {
   return (
     <picture className={className}>
       <source media="(max-width: 768px)" srcSet={photo.srcSmall} />
-      <img loading={eager ? 'eager' : 'lazy'} src={photo.src} alt={photo.alt} />
+      <img loading={eager ? 'eager' : 'lazy'} src={photo.src} alt={photo.alt} onLoad={onLoad} />
     </picture>
   );
 }
 
 export default function Home() {
   const randomPool = useMemo(() => memories.chapters.flatMap((chapter) => chapter.photos), []);
+  const introPool = useMemo(() => [
+    memories.chapters[2].photos[8],
+    memories.chapters[3].photos[3],
+    memories.chapters[4].photos[0],
+  ], []);
   const [randomIndex, setRandomIndex] = useState(0);
   const [introViews, setIntroViews] = useState(0);
+  const [introLoading, setIntroLoading] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = introViews < 3 ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [introViews]);
 
+  useEffect(() => {
+    introPool.forEach((photo) => {
+      const preload = new Image();
+      preload.src = photo.srcSmall;
+    });
+  }, [introPool]);
+
   const openMemory = () => {
     if (introViews >= 3) return;
-    let nextPhoto = randomIndex;
-    while (nextPhoto === randomIndex) nextPhoto = Math.floor(Math.random() * randomPool.length);
-    setRandomIndex(nextPhoto);
     const nextView = introViews + 1;
+    setIntroLoading(true);
     setIntroViews(nextView);
     if (nextView === 3) {
       window.setTimeout(() => document.querySelector('.timeline')?.scrollIntoView({ behavior: 'smooth' }), 250);
@@ -50,13 +61,21 @@ export default function Home() {
     <main>
       <section className={`opening ${introViews ? 'opening--memory' : ''}`} aria-labelledby="site-title">
         <div className="opening__grain" />
-        {introViews > 0 && <MemoryPhoto photo={randomPool[randomIndex]} className="opening-memory" eager />}
+        {introViews > 0 && (
+          <MemoryPhoto
+            key={introPool[introViews - 1].src}
+            photo={introPool[introViews - 1]}
+            className="opening-memory"
+            eager
+            onLoad={() => setIntroLoading(false)}
+          />
+        )}
+        {introLoading && <div className="opening-loader" role="status" aria-label="写真を読み込み中"><span /></div>}
         <div className="opening__content">
-          <p className="eyebrow">Happy Birthday</p>
-          {introViews === 0 && <h1 id="site-title">OUR DAYS</h1>}
+          {introViews === 0 && <h1 id="site-title">Happy Birthday<br />Haruka.</h1>}
           {introViews < 3 && (
-            <button className="opening-trigger" onClick={openMemory} type="button">
-              <span>{introViews === 0 ? '思い出を見る' : 'もう一枚'}</span>
+            <button className="opening-trigger" onClick={openMemory} type="button" disabled={introLoading}>
+              <span>{introLoading ? '読み込み中' : introViews === 0 ? '思い出を見る' : 'もう一枚'}</span>
               <small>{introViews} / 3</small>
             </button>
           )}
