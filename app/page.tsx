@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import memories from '@/data/memories.json';
 
@@ -18,6 +18,24 @@ function MemoryPhoto({ photo, className = '', eager = false }: { photo: Photo; c
 export default function Home() {
   const randomPool = useMemo(() => memories.chapters.flatMap((chapter) => chapter.photos), []);
   const [randomIndex, setRandomIndex] = useState(0);
+  const [introViews, setIntroViews] = useState(0);
+
+  useEffect(() => {
+    document.body.style.overflow = introViews < 3 ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [introViews]);
+
+  const openMemory = () => {
+    if (introViews >= 3) return;
+    let nextPhoto = randomIndex;
+    while (nextPhoto === randomIndex) nextPhoto = Math.floor(Math.random() * randomPool.length);
+    setRandomIndex(nextPhoto);
+    const nextView = introViews + 1;
+    setIntroViews(nextView);
+    if (nextView === 3) {
+      window.setTimeout(() => document.querySelector('.timeline')?.scrollIntoView({ behavior: 'smooth' }), 250);
+    }
+  };
 
   const showAnotherMemory = () => {
     if (randomPool.length < 2) return;
@@ -30,21 +48,18 @@ export default function Home() {
 
   return (
     <main>
-      <section className="opening" aria-labelledby="site-title">
+      <section className={`opening ${introViews ? 'opening--memory' : ''}`} aria-labelledby="site-title">
         <div className="opening__grain" />
+        {introViews > 0 && <MemoryPhoto photo={randomPool[randomIndex]} className="opening-memory" eager />}
         <div className="opening__content">
           <p className="eyebrow">Happy Birthday</p>
-          <h1 id="site-title">OUR DAYS</h1>
-          <a className="start-button" href="#introduction">START</a>
-        </div>
-        <p className="scroll-note">SCROLL</p>
-      </section>
-
-      <section className="introduction" id="introduction">
-        <MemoryPhoto photo={memories.chapters[0].photos[0]} className="introduction__photo" eager />
-        <div className="introduction__copy reveal">
-          <p className="section-label">MEMORY BOOK</p>
-          <h2>二人で過ごした日々。</h2>
+          {introViews === 0 && <h1 id="site-title">OUR DAYS</h1>}
+          {introViews < 3 && (
+            <button className="opening-trigger" onClick={openMemory} type="button">
+              <span>{introViews === 0 ? '思い出を見る' : 'もう一枚'}</span>
+              <small>{introViews} / 3</small>
+            </button>
+          )}
         </div>
       </section>
 
@@ -66,6 +81,13 @@ export default function Home() {
                   className={`chapter__tile chapter__tile--${photoIndex + 1} reveal`}
                 />
               ))}
+              {chapter.videos[0] && (
+                <figure className="chapter__tile chapter__tile--video reveal">
+                  <video autoPlay muted loop playsInline preload="metadata" aria-label={chapter.videos[0].label}>
+                    <source src={chapter.videos[0].src} type="video/mp4" />
+                  </video>
+                </figure>
+              )}
             </div>
 
           </article>
@@ -79,33 +101,6 @@ export default function Home() {
         </div>
         <MemoryPhoto key={randomPool[randomIndex].src} photo={randomPool[randomIndex]} className="random-memory__photo" />
         <Button className="random-button" onClick={showAnotherMemory}>もう一枚</Button>
-      </section>
-
-      <section className="video-memories">
-        <header className="section-heading reveal">
-          <p className="section-label section-label--light">VIDEO MEMORIES</p>
-          <h2>動いている思い出。</h2>
-        </header>
-        <div className="video-grid">
-          {memories.chapters.filter((chapter) => chapter.videos[0]).map((chapter) => (
-            <figure className="video-card reveal" key={chapter.number}>
-              <video controls playsInline preload="none" aria-label={chapter.videos[0].label}>
-                <source src={chapter.videos[0].src} type="video/mp4" />
-              </video>
-              <figcaption>{chapter.title}</figcaption>
-            </figure>
-          ))}
-        </div>
-      </section>
-
-      <section className="our-next">
-        <p className="section-label reveal">OUR NEXT</p>
-        <h2 className="reveal">これから。</h2>
-        <ul className="next-list">
-          <li className="reveal"><span>01</span>次に行きたい場所</li>
-          <li className="reveal"><span>02</span>一緒にやりたいこと</li>
-          <li className="reveal"><span>03</span>また見たい景色</li>
-        </ul>
       </section>
 
       <section className="birthday-message">

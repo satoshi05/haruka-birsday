@@ -20,12 +20,12 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
 VIDEO_EXTENSIONS = {".mp4", ".mov", ".m4v"}
 
 CHAPTERS = [
+    ("03-yamanashi-trip", "富士・山梨"),
     ("01-first-days-and-festival", "さくらんぼ狩り・富士吉原祭り"),
     ("06-grand-illumination", "グランイルミ"),
     ("02-ayame-festival", "あやめ祭り"),
-    ("05-atami-sea-fireworks", "熱海の海"),
+    ("05-atami-sea-fireworks", "熱海"),
     ("04-nagaoka-fireworks", "長岡花火"),
-    ("03-yamanashi-trip", "ひまわり畑・ホテルの上から見た花火"),
 ]
 
 
