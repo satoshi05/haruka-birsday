@@ -4,12 +4,19 @@ assets/photos/raw/*
 assets/videos/raw/*
 !assets/videos/raw/.gitkeep
 
+# Private working selections (publish only after explicit approval and optimization)
+assets/photos/selected/*
+!assets/photos/selected/.gitkeep
+assets/videos/selected/*
+!assets/videos/selected/.gitkeep
+
 # Generated media-analysis artifacts
 assets/video-thumbnails/*
 !assets/video-thumbnails/.gitkeep
 data/contact-sheets/
 data/thumbnails/
 data/analysis-cache/
+data/media-analysis.json
 data/*.tmp
 
 # Local work and exports
