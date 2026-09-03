@@ -2706,43 +2706,43 @@
     {
       "event": "グランイルミ",
       "slug": "06-grand-illumination",
-      "title": "光の中で、いつもの二人",
-      "message": "きらきらした景色もよかったけど、隣で笑ってる晴香がいちばん印象に残ってる。",
+      "title": "グランイルミ",
+      "message": "グランイルミ",
       "date_status": "unknown-exif-missing"
     },
     {
       "event": "伊豆長岡温泉あやめ祭",
       "slug": "02-ayame-festival",
-      "title": "浴衣で歩いた夏の夜",
-      "message": "浴衣姿で一緒に歩けたことが、夏の特別な思い出になったよ。",
+      "title": "あやめ祭り",
+      "message": "あやめ祭り",
       "date_status": "unknown-exif-missing"
     },
     {
       "event": "山梨井沢旅行＆フルーツ巡り",
       "slug": "03-yamanashi-trip",
-      "title": "ひまわりと、寄り道だらけの旅",
-      "message": "目的地だけじゃなくて、二人で笑った寄り道まで全部いい思い出。",
+      "title": "ひまわり畑・ホテルの上から見た花火",
+      "message": "ひまわり畑・ホテルの上から見た花火",
       "date_status": "unknown-exif-missing"
     },
     {
       "event": "滝と富士吉原祭とさくらんぼがり、中野の棚田",
       "slug": "01-first-days-and-festival",
-      "title": "はじまりの日、いくつもの景色",
-      "message": "まだ知らないことばかりだった頃から、こんなにたくさんの景色を一緒に見てきたね。",
+      "title": "さくらんぼ狩り・富士吉原祭り",
+      "message": "さくらんぼ狩り・富士吉原祭り",
       "date_status": "unknown-exif-missing"
     },
     {
       "event": "熱海の海と花火",
       "slug": "05-atami-sea-fireworks",
-      "title": "海辺で過ごした、ゆっくりした時間",
-      "message": "何か特別なことをしなくても、晴香といる時間はちゃんと思い出になる。",
+      "title": "熱海の海",
+      "message": "熱海の海",
       "date_status": "unknown-exif-missing"
     },
     {
       "event": "長岡花火",
       "slug": "04-nagaoka-fireworks",
-      "title": "同じ空を見上げた夜",
-      "message": "写真に入りきらないくらい大きな花火を、隣で一緒に見られてよかった。",
+      "title": "長岡花火",
+      "message": "長岡花火",
       "date_status": "unknown-exif-missing"
     }
   ]
