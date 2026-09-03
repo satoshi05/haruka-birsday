@@ -6,6 +6,15 @@ import memories from '@/data/memories.json';
 
 type Photo = (typeof memories.chapters)[number]['photos'][number];
 
+function shuffled<T>(items: readonly T[]) {
+  const result = [...items];
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    const target = Math.floor(Math.random() * (index + 1));
+    [result[index], result[target]] = [result[target], result[index]];
+  }
+  return result;
+}
+
 function MemoryPhoto({ photo, className = '', eager = false }: { photo: Photo; className?: string; eager?: boolean }) {
   return (
     <picture className={className}>
@@ -17,11 +26,7 @@ function MemoryPhoto({ photo, className = '', eager = false }: { photo: Photo; c
 
 export default function Home() {
   const randomPool = useMemo(() => memories.chapters.flatMap((chapter) => chapter.photos), []);
-  const introPool = useMemo(() => [
-    memories.chapters[2].photos[8],
-    memories.chapters[3].photos[3],
-    memories.chapters[4].photos[0],
-  ], []);
+  const introPool = useMemo(() => shuffled(memories.introPhotos), []);
   const [randomIndex, setRandomIndex] = useState(0);
   const [introViews, setIntroViews] = useState(0);
   const [introReady, setIntroReady] = useState(false);

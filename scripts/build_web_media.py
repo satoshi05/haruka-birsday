@@ -16,6 +16,7 @@ PROJECT = Path(__file__).resolve().parents[1]
 PHOTO_ROOT = PROJECT / "assets" / "photos" / "selected"
 VIDEO_ROOT = PROJECT / "assets" / "videos" / "selected"
 PUBLIC_ROOT = PROJECT / "public" / "media"
+INTRO_ROOT = PHOTO_ROOT / "00-opening"
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".heic"}
 VIDEO_EXTENSIONS = {".mp4", ".mov", ".m4v"}
 
@@ -52,7 +53,22 @@ def convert_video(source: Path, destination: Path) -> None:
 def main() -> None:
     if PUBLIC_ROOT.exists():
         shutil.rmtree(PUBLIC_ROOT)
-    manifest = {"title": "OUR DAYS", "chapters": []}
+    manifest = {"title": "OUR DAYS", "introPhotos": [], "chapters": []}
+    intro_photos = sorted(
+        path for path in INTRO_ROOT.iterdir()
+        if path.is_file() and path.suffix.lower() in IMAGE_EXTENSIONS
+    )
+    for photo_number, source in enumerate(intro_photos, 1):
+        stem = f"photo-{photo_number:02d}"
+        large = PUBLIC_ROOT / "opening" / f"{stem}-1280.webp"
+        small = PUBLIC_ROOT / "opening" / f"{stem}-768.webp"
+        convert_photo(source, large, 1280)
+        convert_photo(source, small, 768)
+        manifest["introPhotos"].append({
+            "src": f"media/opening/{stem}-1280.webp",
+            "srcSmall": f"media/opening/{stem}-768.webp",
+            "alt": f"最初の思い出 {photo_number}",
+        })
     for chapter_number, (source_slug, title) in enumerate(CHAPTERS, 1):
         web_slug = f"chapter-{chapter_number:02d}"
         photos = sorted(
@@ -88,6 +104,7 @@ def main() -> None:
     destination.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({
         "chapters": len(manifest["chapters"]),
+        "introPhotos": len(manifest["introPhotos"]),
         "photos": sum(len(chapter["photos"]) for chapter in manifest["chapters"]),
         "videos": sum(len(chapter["videos"]) for chapter in manifest["chapters"]),
     }, ensure_ascii=False))

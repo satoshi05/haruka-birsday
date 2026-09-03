@@ -1,5 +1,22 @@
 {
   "title": "OUR DAYS",
+  "introPhotos": [
+    {
+      "src": "media/opening/photo-01-1280.webp",
+      "srcSmall": "media/opening/photo-01-768.webp",
+      "alt": "最初の思い出 1"
+    },
+    {
+      "src": "media/opening/photo-02-1280.webp",
+      "srcSmall": "media/opening/photo-02-768.webp",
+      "alt": "最初の思い出 2"
+    },
+    {
+      "src": "media/opening/photo-03-1280.webp",
+      "srcSmall": "media/opening/photo-03-768.webp",
+      "alt": "最初の思い出 3"
+    }
+  ],
   "chapters": [
     {
       "number": 1,
